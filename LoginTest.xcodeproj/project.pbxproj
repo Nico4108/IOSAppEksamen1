@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		A3BC69BB4E0D443370DAED06 /* Pods_LoginTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED088E03EDA3D18A372BBEB6 /* Pods_LoginTest.framework */; };
+		A817E60A259A3EDE0070EC7B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A817E609259A3EDE0070EC7B /* LocationManager.swift */; };
+		A8B3BD0E259A70AD00FC61BB /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B3BD0D259A70AD00FC61BB /* CircleImage.swift */; };
+		A8DB1B5A25868F40008DEC21 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DB1B5925868F40008DEC21 /* MapView.swift */; };
+		A8DB1B5E2586915D008DEC21 /* MapViewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DB1B5D2586915D008DEC21 /* MapViewDetailView.swift */; };
+		A8DB1B65258699E6008DEC21 /* CreatePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DB1B64258699E6008DEC21 /* CreatePlaceView.swift */; };
 		A8FCA071257A335400F37CA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCA070257A335400F37CA7 /* AppDelegate.swift */; };
 		A8FCA073257A335400F37CA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCA072257A335400F37CA7 /* SceneDelegate.swift */; };
 		A8FCA075257A335400F37CA7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCA074257A335400F37CA7 /* ContentView.swift */; };
@@ -27,6 +32,11 @@
 
 /* Begin PBXFileReference section */
 		A5580AD47552F194633CED12 /* Pods-LoginTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginTest.release.xcconfig"; path = "Target Support Files/Pods-LoginTest/Pods-LoginTest.release.xcconfig"; sourceTree = "<group>"; };
+		A817E609259A3EDE0070EC7B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		A8B3BD0D259A70AD00FC61BB /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		A8DB1B5925868F40008DEC21 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		A8DB1B5D2586915D008DEC21 /* MapViewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewDetailView.swift; sourceTree = "<group>"; };
+		A8DB1B64258699E6008DEC21 /* CreatePlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaceView.swift; sourceTree = "<group>"; };
 		A8FCA06D257A335400F37CA7 /* LoginTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8FCA070257A335400F37CA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8FCA072257A335400F37CA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +79,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A8DB1B5825868F1E008DEC21 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				A8DB1B5925868F40008DEC21 /* MapView.swift */,
+				A8DB1B5D2586915D008DEC21 /* MapViewDetailView.swift */,
+				A8DB1B64258699E6008DEC21 /* CreatePlaceView.swift */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
 		A8FCA064257A335400F37CA7 = {
 			isa = PBXGroup;
 			children = (
@@ -90,9 +110,11 @@
 		A8FCA06F257A335400F37CA7 /* LoginTest */ = {
 			isa = PBXGroup;
 			children = (
+				A8DB1B5825868F1E008DEC21 /* MapView */,
 				A8FCA0A3257A52A900F37CA7 /* ListView */,
 				A8FCA095257A3D0A00F37CA7 /* LoginViews */,
 				A8FCA070257A335400F37CA7 /* AppDelegate.swift */,
+				A817E609259A3EDE0070EC7B /* LocationManager.swift */,
 				A8FCA072257A335400F37CA7 /* SceneDelegate.swift */,
 				A8FCA074257A335400F37CA7 /* ContentView.swift */,
 				A8FCA085257A33AA00F37CA7 /* GoogleService-Info.plist */,
@@ -126,6 +148,7 @@
 		A8FCA0A3257A52A900F37CA7 /* ListView */ = {
 			isa = PBXGroup;
 			children = (
+				A8B3BD0D259A70AD00FC61BB /* CircleImage.swift */,
 				A8FCA0A4257A52C900F37CA7 /* ListView.swift */,
 				A8FCA0A8257A538800F37CA7 /* DetailView.swift */,
 				A8FCA0D3257A620600F37CA7 /* Repo */,
@@ -273,7 +296,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8DB1B65258699E6008DEC21 /* CreatePlaceView.swift in Sources */,
+				A8B3BD0E259A70AD00FC61BB /* CircleImage.swift in Sources */,
 				A8FCA0D5257A621A00F37CA7 /* Repo.swift in Sources */,
+				A817E60A259A3EDE0070EC7B /* LocationManager.swift in Sources */,
+				A8DB1B5A25868F40008DEC21 /* MapView.swift in Sources */,
 				A8FCA0A5257A52C900F37CA7 /* ListView.swift in Sources */,
 				A8FCA0A9257A538800F37CA7 /* DetailView.swift in Sources */,
 				A8FCA071257A335400F37CA7 /* AppDelegate.swift in Sources */,
@@ -282,6 +309,7 @@
 				A8FCA073257A335400F37CA7 /* SceneDelegate.swift in Sources */,
 				A8FCA0A1257A3F0800F37CA7 /* ErrorView.swift in Sources */,
 				A8FCA097257A3D8400F37CA7 /* Home.swift in Sources */,
+				A8DB1B5E2586915D008DEC21 /* MapViewDetailView.swift in Sources */,
 				A8FCA075257A335400F37CA7 /* ContentView.swift in Sources */,
 				A8FCA0B3257A544900F37CA7 /* Place.swift in Sources */,
 			);

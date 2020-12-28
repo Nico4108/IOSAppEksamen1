@@ -59,9 +59,3 @@ struct ErrorView : View {
         .background(Color.black.opacity(0.35).edgesIgnoringSafeArea(.all))
     }
 }
-
-/*struct ErrorView_Previews: PreviewProvider {
-    static var previews: some View {
-        ErrorView()
-    }
-}*/
