@@ -15,7 +15,7 @@ struct MapViewDetailView: View {
     
     @State var showSheet = false
     
-    private var locationManager = LocationManager()
+    var locationManager = LocationManager()
     
     var body: some View {
         
@@ -54,7 +54,6 @@ struct MapViewDetailView: View {
             }
         }
         .navigationBarTitle("Map")
-        //.navigationBarHidden(true)
         
     }
 }

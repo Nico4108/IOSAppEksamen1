@@ -12,9 +12,8 @@ import Firebase
 struct ListView: View {
     
     @ObservedObject var repo = Repo() // 2-way binding
-    private var locationManager = LocationManager()
-    //var places: Place
-    
+    var locationManager = LocationManager()
+ 
     var body: some View {
         
         NavigationView {

@@ -18,11 +18,6 @@ struct Place: Hashable, Codable, Identifiable{
     var latitude : Double
     var longitude : Double
     
-    /*var imageName: String
-        var image: Image {
-            Image(imageName)
-        }*/
-    
     var coordinates: CLLocationCoordinate2D {
         return .init(latitude: latitude, longitude: longitude)
     }
