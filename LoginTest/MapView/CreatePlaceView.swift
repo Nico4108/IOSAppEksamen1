@@ -32,8 +32,6 @@ struct CreatePlaceView: View {
     
     @State var upload_image:UIImage?
     
-    //var places: Place
-    
     var body: some View {
         
         NavigationView {
@@ -97,11 +95,11 @@ struct CreatePlaceView: View {
                     // Tager bruger Id og sætter det på document id feltet.
                     let user = Auth.auth().currentUser
                     let userid = user?.uid
-                    self.repo.addPlace(place: Place(id: UUID(), name: self.placeinput, description: self.descpinput, latitude: self.centerCoordinate.latitude, longitude: self.centerCoordinate.longitude, userId: userid!))
+                    let uuid = UUID()
+                    self.repo.addPlace(place: Place(id: uuid, name: self.placeinput, description: self.descpinput, latitude: self.centerCoordinate.latitude, longitude: self.centerCoordinate.longitude, userId: userid!))
                     
                     if let thisImage = self.upload_image {
-                        // Få ID fra Place over istedet for UUID()!!! (places.id??)
-                        uploadImage(image: thisImage, id: UUID())
+                        uploadImage(image: thisImage, id: uuid)
                     } else {
                         print("Somthing went wrong - No image present")
                     }
@@ -128,8 +126,6 @@ struct CreatePlaceView: View {
 }
 
 func uploadImage(image:UIImage, id: UUID){
-    
-    // Mangler at få billedets id til samme som place id (istedet for "tem")
     
     if let imageData = image.jpegData(compressionQuality: 1){
         let storage = Storage.storage()

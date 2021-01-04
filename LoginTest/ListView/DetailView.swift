@@ -27,7 +27,7 @@ struct DetailView: View {
                 .ignoresSafeArea(edges: .top)
                 .frame(height: 200)
             
-            CircleImage()
+            CircleImage(imageID1: $currentPlace.id)
                 .offset(y: -130)
                 .padding(.bottom, -130)
             
@@ -61,5 +61,6 @@ struct DetailView: View {
                 .frame(width: 30, height: 30)
                 .foregroundColor(Color.red)
         })
+        
     }
 }

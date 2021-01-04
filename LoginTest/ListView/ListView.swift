@@ -22,13 +22,9 @@ struct ListView: View {
                     List{
                         ForEach(self.repo.places){ place in
                             NavigationLink(destination: DetailView(repo: self.repo, text: place.name, currentPlace: place)){
+                                
                                 VStack {
-                                    HStack {
-                                        //places.image
-                                            //.resizable()
-                                            //.frame(width: 50, height: 50)
                                     Text(place.name)
-                                    }
                                 }
                             }
                         }
