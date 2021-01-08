@@ -28,6 +28,14 @@ struct Login : View {
                     
                     VStack{
                         
+                        Image("papit")
+                            .resizable()
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                            .shadow(radius: 7)
+                            .scaledToFit()
+                            .padding(.top, 40)
+                        
                         Text("Log in to your account")
                             .font(.title)
                             .fontWeight(.bold)
@@ -38,9 +46,9 @@ struct Login : View {
                         .autocapitalization(.none)
                         .padding()
                           .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ? Color.red : self.color,lineWidth: 2))
-                        .padding(.top, 25)
+                        .padding(.top, 15)
                         
-                        HStack(spacing: 15){
+                        HStack(spacing: 10){
                             
                             VStack{
                                 
@@ -69,7 +77,7 @@ struct Login : View {
                         }
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 4).stroke(self.pass != "" ? Color.red : self.color,lineWidth: 2))
-                        .padding(.top, 25)
+                        .padding(.top, 15)
                         
                         HStack{
                             
@@ -81,12 +89,14 @@ struct Login : View {
                                 
                             }) {
                                 
-                                Text("Forget password")
+                                Text("Forgot password")
+                                    .font(.caption)
                                     .fontWeight(.bold)
-                                  .foregroundColor(Color.red)
+                                    .foregroundColor(Color.red)
+                                    .padding(.bottom)
                             }
                         }
-                        .padding(.top, 20)
+                        .padding(.top, 10)
                         
                         Button(action: {
                             
@@ -101,10 +111,10 @@ struct Login : View {
                         }
                         .background(Color.red)
                         .cornerRadius(10)
-                        .padding(.top, 25)
+                        .padding(.bottom, 15)
                         
                     }
-                    .padding(.horizontal, 25)
+                    .padding(.horizontal, 15)
                 }
                 
                 Button(action: {
@@ -136,7 +146,9 @@ struct Login : View {
                 
                 if err != nil{
                     
+                    // Skriver en error som er indbygget fra firebase
                     self.error = err!.localizedDescription
+                    print(error)
                     self.alert.toggle()
                     return
                 }
@@ -178,9 +190,3 @@ struct Login : View {
         }
     }
 }
-
-/*struct Login_Previews: PreviewProvider {
-    static var previews: some View {
-        Login()
-    }
-}*/

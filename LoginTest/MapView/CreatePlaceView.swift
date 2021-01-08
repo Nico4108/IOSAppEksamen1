@@ -37,57 +37,73 @@ struct CreatePlaceView: View {
         NavigationView {
             
             VStack{
-                
-                TextField("Type name here", text: $placeinput)
-                    .padding()
-                TextField("Type decription here", text: $descpinput)
-                    .padding()
-                
+                ZStack{
                     // Imagepicker
                     if upload_image != nil {
                         Image(uiImage: upload_image!)
                             .resizable()
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                            .shadow(radius: 7)
                             .scaledToFit()
-                            .frame(width:120, height:120)
                     } else {
-                        Image(systemName: "timelapse")
+                        Image("insertphoto2")
                             .resizable()
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                            .shadow(radius: 7)
                             .scaledToFit()
-                            .frame(width:120, height:120)
                     }
+                    
+                    
+                    // Vælg Image button
+                    Button(action: {
+                        
+                        self.showActionSheet = true
+                        
+                    }) {
+                        Image(systemName: "camera.fill")
+                            .padding()
+                            .foregroundColor(.red)
+                            .font(.headline)
+                            .frame(width: 150, height: 150)
+                            .padding(.top)
+                    }.actionSheet(isPresented: $showActionSheet){
+                        ActionSheet(title: Text("Add a picture to your post"), message: nil, buttons: [
+                            //Button1
+                            .default(Text("Camera"), action: {
+                                self.showImagePicker = true
+                                self.sourceType = .camera
+                            }),
+                            //Button2
+                            .default(Text("Photo Library"), action: {
+                                self.showImagePicker = true
+                                self.sourceType = .photoLibrary
+                            }),
+                            //Button3
+                            .cancel()
+                            
+                        ])
+                    }
+                    .sheet(isPresented: $showImagePicker){
+                        imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
+                        
+                    }
+                }
                 
-                // Vælg Image button
-                Button(action: {
-                    
-                    //self.shown.toggle()
-                    self.showActionSheet = true
-                    
-                }) {
-                    Image(systemName: "camera.fill")
-                        .padding()
-                }.actionSheet(isPresented: $showActionSheet){
-                    ActionSheet(title: Text("Add a picture to your post"), message: nil, buttons: [
-                        //Button1
-                        
-                        .default(Text("Camera"), action: {
-                            self.showImagePicker = true
-                            self.sourceType = .camera
-                        }),
-                        //Button2
-                        .default(Text("Photo Library"), action: {
-                            self.showImagePicker = true
-                            self.sourceType = .photoLibrary
-                        }),
-                        
-                        //Button3
-                        .cancel()
-                        
-                    ])
-                }
-                .sheet(isPresented: $showImagePicker){
-                    imagePicker(image: self.$upload_image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
-                    
-                }
+                TextField("Type name here", text: $placeinput)
+                    .autocapitalization(.none)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 4).stroke(Color.red, lineWidth: 2))
+                    .padding(.top)
+                    .padding()
+                
+                TextField("Type decription here", text: $descpinput)
+                    .autocapitalization(.none)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 4).stroke(Color.red, lineWidth: 2))
+                    .padding()
+                
                 
                 // Tilføjer til database
                 Button(action: {
@@ -110,9 +126,10 @@ struct CreatePlaceView: View {
                     
                 }) {
                     Image(systemName: "plus.circle.fill")
-                        .padding()
+                        .padding(.bottom)
+                        .foregroundColor(.red)
+                        .font(.largeTitle)
                 }
-                
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("New place"), message: Text("You have added a new place"), dismissButton: .default(Text("Okay")){
@@ -120,11 +137,10 @@ struct CreatePlaceView: View {
                     presentationMode.wrappedValue.dismiss()
                 })
             }
-            
         }
     }
 }
-
+// Funktion til at uploade et billed til firebase
 func uploadImage(image:UIImage, id: UUID){
     
     if let imageData = image.jpegData(compressionQuality: 1){
@@ -177,7 +193,7 @@ class imagePickerCoordinator: NSObject, UINavigationControllerDelegate, UIImageP
         _image = image
         _showImagePicker = showImagePicker
     }
-
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let uiimage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             image = uiimage

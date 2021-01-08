@@ -23,6 +23,7 @@ struct DetailView: View {
     var body: some View {
         
         VStack{
+        
             MapView(centerCoordinate: $centerCoordinate, annotations: annotations)
                 .ignoresSafeArea(edges: .top)
                 .frame(height: 200)

@@ -53,7 +53,6 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
         
         if annotations.count != uiView.annotations.count {
-            //uiView.removeAnnotations(uiView.annotations)
             uiView.addAnnotations(annotations)
             // uiView.showAnnotations(annotations, animated: false)
         }
@@ -77,6 +76,7 @@ struct MapView: UIViewRepresentable {
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
             // gem ny lokation for centrum af map:
             parent.centerCoordinate = mapView.centerCoordinate
+            // Starter appen på din lokation(her London da det er hvor simulatoren er sat til)
             //mapView.userTrackingMode = .followWithHeading
         }
         

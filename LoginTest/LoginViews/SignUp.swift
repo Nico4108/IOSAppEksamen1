@@ -122,18 +122,6 @@ struct SignUp : View {
                     }
                     .padding(.horizontal, 25)
                 }
-                
-                Button(action: {
-                    
-                    self.show.toggle()
-                    
-                }) {
-                    
-                    Image(systemName: "chevron.left")
-                        .font(.title)
-                      .foregroundColor(Color.red)
-                }
-                .padding()
             }
             
             if self.alert{
@@ -141,7 +129,7 @@ struct SignUp : View {
                 ErrorView(alert: self.$alert, error: self.$error)
             }
         }
-        .navigationBarBackButtonHidden(true)
+        
     }
     
     func register(){
@@ -178,9 +166,3 @@ struct SignUp : View {
         }
     }
 }
-
-/*struct SignUp_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUp()
-    }
-}*/

@@ -45,22 +45,6 @@ struct CircleImage: View {
             }
         }
     }
-    
-    func download_Image() {
-        Storage.storage().reference().child("temp1").getData(maxSize: 2 * 1024 * 1024){
-            (imageData, err) in
-            if let err = err {
-                print("an error has occurred - \(err.localizedDescription)")
-            } else {
-                if let imageData = imageData {
-                    self.download_image = UIImage(data: imageData)
-                    print("Image downloaded!")
-                } else {
-                    print("couldn't unwrap image data image")
-                }
-            }
-        }
-    }
 }
 
 // Laver animationen til loading!!

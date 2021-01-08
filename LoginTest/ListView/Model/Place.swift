@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct Place: Hashable, Codable, Identifiable{
+struct Place: Hashable, Identifiable{
     
     var id = UUID()
     var userId : String
@@ -17,10 +17,6 @@ struct Place: Hashable, Codable, Identifiable{
     var description : String
     var latitude : Double
     var longitude : Double
-    
-    var coordinates: CLLocationCoordinate2D {
-        return .init(latitude: latitude, longitude: longitude)
-    }
     
     init(id: UUID, name: String, description: String, latitude: Double, longitude: Double, userId: String) {
         self.id = id

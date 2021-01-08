@@ -40,8 +40,7 @@ struct MapViewDetailView: View {
                         let newLocation = MKPointAnnotation()
                         newLocation.coordinate = self.centerCoordinate
                         self.annotations.append(newLocation)
-                        print(annotations, "----- Here")
-                        print(newLocation.coordinate, "-----also here")
+                        
                     }) {
                         Image(systemName:"plus.circle.fill")
                             .foregroundColor(.red)

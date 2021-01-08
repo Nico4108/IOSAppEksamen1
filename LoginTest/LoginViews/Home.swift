@@ -26,7 +26,8 @@ struct Home : View {
                 else{
                     
                     ZStack{
-                        
+                        // isActive bliver sat til true ved parsing $show værdi og
+                        // viser derefter SignUp()
                         NavigationLink(destination: SignUp(show: self.$show), isActive: self.$show) {
                             
                             Text("")

@@ -20,7 +20,8 @@ struct ErrorView : View {
             VStack{
                 
                 HStack{
-                    
+                    // Hvis error == "RESET" så skriver den "Message",
+                    // ellers skriver den "Error" (Gælder for de 2 andre også)
                     Text(self.error == "RESET" ? "Message" : "Error")
                         .font(.title)
                         .fontWeight(.bold)
