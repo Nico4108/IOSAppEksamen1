@@ -26,26 +26,15 @@ struct MapView: UIViewRepresentable {
         map.delegate = context.coordinator
         map.showsUserLocation = true
         
+        // Henter place info til Pin
         collection.addSnapshotListener { (snapshot, error) in
             if error == nil {
-                if let snap = snapshot {
-                    self.repo.places.removeAll() // tøm listen først
-                    let user = Auth.auth().currentUser
-                    let userid = user?.uid
-                    for document in snap.documents{
-                        if userid == document.data()["userId"] as? String,
-                           let name = document.data()["name"] as? String,
-                           let description = document.data()["description"] as? String,
-                           let lat = document.data()["latitude"] as? CLLocationDegrees,
-                           let lon = document.data()["longitude"] as? CLLocationDegrees
-                        {
-                            let annotaion = MKPointAnnotation(__coordinate: (CLLocationCoordinate2DMake(lat, lon)), title: name, subtitle: description)
-                            self.annotations.append(annotaion)
+                for place in repo.places {
+                    let annotaion = MKPointAnnotation(__coordinate: (CLLocationCoordinate2DMake(place.latitude, place.longitude)), title: place.name, subtitle: place.description)
+                        self.annotations.append(annotaion)
                         }
                     }
                 }
-            }
-        }
         
         return map
     }
@@ -54,7 +43,7 @@ struct MapView: UIViewRepresentable {
         
         if annotations.count != uiView.annotations.count {
             uiView.addAnnotations(annotations)
-            // uiView.showAnnotations(annotations, animated: false)
+            //uiView.showAnnotations(annotations, animated: true)
         }
     }
     
@@ -63,7 +52,8 @@ struct MapView: UIViewRepresentable {
     }
     
     
-    //Cordinator er en bro mellem data
+    // Cordinator er en bro mellem data
+    // kommunikere ændringer fra dit View til andre dele af dit SwiftUI-interface
     class Coordinator: NSObject, MKMapViewDelegate {
         
         // Laver en instance så vi kan kalde variable fra mapview
@@ -80,7 +70,7 @@ struct MapView: UIViewRepresentable {
             //mapView.userTrackingMode = .followWithHeading
         }
         
-        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        private func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKMarkerAnnotationView? {
             // this is our unique identifier for view reuse
             let identifier = "Annotation"
             // attempt to find a cell we can recycle
@@ -88,38 +78,27 @@ struct MapView: UIViewRepresentable {
             
             if annotationView == nil {
                 // we didn't find one; make a new one
-                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 
                 // allow this to show pop up information
                 annotationView?.canShowCallout = true
                 
-                // attach an information button to the view
-                //annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             } else {
                 // we have a view to reuse, so give it the new annotation
                 annotationView?.annotation = annotation
             }
             
-            // set userlocation pin til custom icon
+            // set userlocation
             if annotation.isEqual(mapView.userLocation){
-                let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "User Location")
+                let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "User Location")
                 
-                let image = UIImage(named: "pinn")
-                let resizedSize = CGSize(width: 50, height: 50)
-
-                UIGraphicsBeginImageContext(resizedSize)
-                image?.draw(in: CGRect(origin: .zero, size: resizedSize))
-                let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-
-                annotationView.image = resizedImage
                 annotationView.canShowCallout = true
                 
                 return annotationView
             }
             
             // whether it's a new view or a recycled one, send it back
-            return annotationView
+            return annotationView as? MKMarkerAnnotationView
         }
     }
 }

@@ -14,8 +14,7 @@ struct DetailView: View {
     @State var annotations = [MKPointAnnotation]()
     
     var repo: Repo
-    @State var text:String //(@State)værdien bliver pushet til guien, når værdien ændresig opdatere guien også
-    @State var currentPlace:Place
+    @State var currentPlace:Place //(@State)værdien bliver pushet til guien, når værdien ændresig opdatere guien også
     
     @State var ispresented = false
     @Environment(\.presentationMode) var presentationMode
@@ -25,10 +24,11 @@ struct DetailView: View {
         VStack{
         
             MapView(centerCoordinate: $centerCoordinate, annotations: annotations)
+                // fylder hele skærmen
                 .ignoresSafeArea(edges: .top)
                 .frame(height: 200)
             
-            CircleImage(imageID1: $currentPlace.id)
+            CircleImage(currentPlaceimageID: $currentPlace.id)
                 .offset(y: -130)
                 .padding(.bottom, -130)
             
@@ -56,7 +56,6 @@ struct DetailView: View {
         .navigationBarItems(trailing: Button(action:{
             self.ispresented.toggle()
         }){
-            //Text("Delete")
             Image(systemName: "trash.circle.fill")
                 .resizable()
                 .frame(width: 30, height: 30)

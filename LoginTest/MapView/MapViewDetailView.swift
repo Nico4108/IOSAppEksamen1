@@ -15,8 +15,6 @@ struct MapViewDetailView: View {
     
     @State var showSheet = false
     
-    var locationManager = LocationManager()
-    
     var body: some View {
         
         ZStack{
@@ -52,7 +50,7 @@ struct MapViewDetailView: View {
                 }
             }
         }
-        .navigationBarTitle("Map")
+        .navigationBarTitle("Map", displayMode: .inline)
         
     }
 }

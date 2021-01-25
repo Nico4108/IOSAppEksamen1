@@ -28,6 +28,7 @@ struct CreatePlaceView: View {
     @State var showActionSheet = false
     @State var showImagePicker = false
     
+    // Default starter på camera hvis ikke andet.
     @State var sourceType:UIImagePickerController.SourceType = .camera
     
     @State var upload_image:UIImage?
@@ -144,6 +145,7 @@ struct CreatePlaceView: View {
 func uploadImage(image:UIImage, id: UUID){
     
     if let imageData = image.jpegData(compressionQuality: 1){
+        // Billede database
         let storage = Storage.storage()
         storage.reference().child(id.uuidString).putData(imageData, metadata: nil){
             (_, err) in
@@ -159,6 +161,7 @@ func uploadImage(image:UIImage, id: UUID){
 }
 
 // ImagePicker til at få billede på.
+// Default fotoalbum
 struct imagePicker:UIViewControllerRepresentable {
     @Binding var image: UIImage?
     @Binding var showImagePicker: Bool
@@ -168,7 +171,6 @@ struct imagePicker:UIViewControllerRepresentable {
     typealias Coordinator = imagePickerCoordinator
     
     var sourceType:UIImagePickerController.SourceType = .camera
-    
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<imagePicker>) -> UIImagePickerController {
         let picker = UIImagePickerController()
@@ -185,6 +187,8 @@ struct imagePicker:UIViewControllerRepresentable {
     
 }
 
+// Er en class da den skal override det eksisterende billede der er valgt
+// hvis et nyt billede er valgt.
 class imagePickerCoordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @Binding var image: UIImage?
     @Binding var showImagePicker: Bool

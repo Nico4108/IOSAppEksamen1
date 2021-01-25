@@ -20,7 +20,6 @@ struct Home : View {
                 
                 if self.status{
                     
-                    //Homescreen()
                     ListView()
                 }
                 else{
@@ -41,10 +40,13 @@ struct Home : View {
             .navigationBarTitle("")
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
+            // Bliver aktiviret når viewet vises
             .onAppear {
                 
+                // lytter efter "broadcast" om "status" er true eller false
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("status"), object: nil, queue: .main) { (_) in
                     
+                    // sætter self.status til at være true/false og logger ind eller ej.
                     self.status = UserDefaults.standard.value(forKey: "status") as? Bool ?? false
                 }
             }

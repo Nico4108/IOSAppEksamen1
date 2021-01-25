@@ -12,7 +12,7 @@ struct CircleImage: View {
     
     @State var download_image:UIImage?
     
-    @Binding var imageID1: UUID
+    @Binding var currentPlaceimageID: UUID
     
     var body: some View {
 
@@ -28,8 +28,8 @@ struct CircleImage: View {
                 Loader()
             }
         }.onAppear(){
-            
-            Storage.storage().reference().child(imageID1.uuidString).getData(maxSize: 500000000){
+            // maxSize er max størelsen på billedet man henter ned.
+            Storage.storage().reference().child(currentPlaceimageID.uuidString).getData(maxSize: 500000000){
                 (imageData, err) in
                 if let err = err {
                     print("an error has occurred - \(err.localizedDescription)")

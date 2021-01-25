@@ -154,7 +154,10 @@ struct Login : View {
                 }
                 
                 print("success")
+                // Sætter appens tilstand til true så længe true er vi logget ind!
+                // Se Home
                 UserDefaults.standard.set(true, forKey: "status")
+                // Broadcaster "status" og true 
                 NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
             }
         }

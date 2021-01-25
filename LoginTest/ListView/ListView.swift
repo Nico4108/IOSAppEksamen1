@@ -11,8 +11,8 @@ import Firebase
 
 struct ListView: View {
     
-    @ObservedObject var repo = Repo() // 2-way binding
-    var locationManager = LocationManager()
+    @ObservedObject var repo = Repo() // 2-way binding, lytter på ændringer fra @Published fra Repo
+    //var locationManager = LocationManager()
  
     var body: some View {
         
@@ -21,10 +21,11 @@ struct ListView: View {
                 VStack{
                     List{
                         ForEach(self.repo.places){ place in
-                            NavigationLink(destination: DetailView(repo: self.repo, text: place.name, currentPlace: place)){
+                            NavigationLink(destination: DetailView(repo: self.repo, currentPlace: place)){
                                 
                                 VStack {
                                     Text(place.name)
+                                    
                                 }
                             }
                         }

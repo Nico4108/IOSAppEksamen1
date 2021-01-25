@@ -10,34 +10,36 @@ import Firebase
 import FirebaseStorage
 import SwiftUI
 
+// A class "overrides" all references each time a new value is set
 class Repo : ObservableObject {
     
     @Published var places = [Place]() // tom samling af Place Object
     private var collection = Firestore.firestore().collection("places") // giver reference til denne collection
-    private var storage = Storage.storage() // giver rod-adgang til Storage
     
     init() {
         getPlaces()
     }
     
     func getPlaces(){
+        // Closure expression
+        // addSnapshotListener lytter heletiden om data er ændret og updater 
         collection.addSnapshotListener { (snapshot, error) in
             if error == nil {
+                // tjekker at snapshot har en værdi og køre videre.
                 if let snap = snapshot {
                     self.places.removeAll() // tøm listen først
                     // Tager bruger Id og sætter det på document id feltet.
                     let user = Auth.auth().currentUser
-                    let userid = user?.uid
+                    let userid = user!.uid
                     for document in snap.documents{
                         if userid == document.data()["userId"] as? String,
                            let name = document.data()["name"] as? String,
-                           //let imageName = document.data()["imageName"] as? String,
                            let id = UUID(uuidString: document.documentID),
                            let description = document.data()["description"] as? String,
                            let lat = document.data()["latitude"] as? Double,
                            let lon = document.data()["longitude"] as? Double
                         {
-                            let place = Place(id: id, name: name, description: description, latitude: lat, longitude: lon, userId: userid!)
+                            let place = Place(id: id, name: name, description: description, latitude: lat, longitude: lon, userId: userid)
                             self.places.append(place)
                         }
                     }
@@ -70,12 +72,6 @@ class Repo : ObservableObject {
             }else {
                 print("Cloud error \(error.debugDescription)")
             }
-            
         }
     }
-    
-    
-    
-    
-    
 }

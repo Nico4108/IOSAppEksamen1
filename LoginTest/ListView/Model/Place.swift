@@ -7,9 +7,9 @@
 
 import Foundation
 import SwiftUI
-import CoreLocation
 
-struct Place: Hashable, Identifiable{
+// A struct creates a uniqe copy of each new reference
+struct Place: Identifiable{
     
     var id = UUID()
     var userId : String

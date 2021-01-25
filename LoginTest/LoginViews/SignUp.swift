@@ -138,6 +138,7 @@ struct SignUp : View {
             
             if self.pass == self.repass{
                 
+                // indbygget firebase metode
                 Auth.auth().createUser(withEmail: self.email, password: self.pass) { (res, err) in
                     
                     if err != nil{
